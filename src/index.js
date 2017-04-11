@@ -3,8 +3,10 @@ export default sheet => {
   const matches = sheet.match(/@(.*:[^;]*)/g) || [];
 
   matches.forEach(variable => {
-    const definition = variable.split(/:\s*/);
-    lessVars[definition[0]] = definition[1];
+    // calculate the value of this property
+    const value = variable.substr(variable.indexOf(':')+1);
+    const property = variable.split(/:\s*/)[0];
+    lessVars[property] = value;
   });
 
   return lessVars;
